@@ -70,12 +70,12 @@ class AuthController extends Controller
             $credentials = $request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
-                return response()->json(['message' => 'Logueado!']);
+                return response()->json(['message' => 'Logueado!'], 200);
             } else {
-                return response()->json(['message' => 'Credenciales inválidas.'], 200);
+                return response()->json(['message' => 'Credenciales inválidas.'], 400);
             }
         } catch (Exception $e) {
-            return response()->json(['message' => 'Hubo un error interno.'], 400);
+            return response()->json(['message' => 'Hubo un error interno.'], 500);
         }
     }
 
