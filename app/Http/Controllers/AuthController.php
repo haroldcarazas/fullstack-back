@@ -70,7 +70,9 @@ class AuthController extends Controller
             $credentials = $request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
-                return response()->json(['message' => 'Logueado!'], 200);
+                $user = Auth::user();
+
+                return response()->json(['message' => 'Logueado!', 'data' => $user], 200);
             } else {
                 return response()->json(['message' => 'Credenciales inválidas.'], 400);
             }
